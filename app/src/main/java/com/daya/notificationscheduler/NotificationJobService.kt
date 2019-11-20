@@ -23,12 +23,12 @@ class NotificationJobService : JobService() {
     override fun onStartJob(job: JobParameters?): Boolean {
 
 
-        //Create the notification channel
-        createNotificationChannel()
-
 
         //define notification manager object
         mNotifyManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        //Create the notification channel
+        createNotificationChannel()
 
 
 
@@ -47,6 +47,7 @@ class NotificationJobService : JobService() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setAutoCancel(true)
+            .setContentIntent(contentPendingIntent)
 
         mNotifyManager.notify(0,builder.build())
 
